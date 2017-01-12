@@ -1,0 +1,15 @@
+{
+  "name": "fftplayer.js",
+  "homepage": "https://github.com/alexeyroudenko/fftplayer.js",
+  "authors": [
+    "Alexey Rudenko <alexey.roudenko@gmail.com>"
+  ],
+  "description": "fft player for visualisations",
+  "main": "",
+  "keywords": [
+    "fft",
+    "webgl",
+    "webaudio"
+  ],
+  "license": "MIT"
+}
