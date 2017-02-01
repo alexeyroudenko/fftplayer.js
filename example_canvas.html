@@ -39,10 +39,10 @@
 
 		<script type="text/javascript">
 
-			var fftPlayer = new FFTPlayer();
+			var fftPlayer = new FFTPlayer({});
 			fftPlayer.smoothTime = 0.1;
 			fftPlayer.ready = function() {fftPlayer.play();}
-			fftPlayer.loadAudio("audio/sound.m4a");
+			fftPlayer.loadAudio("audio/cut.m4a");
 
 			var canvas = document.getElementById('canvas');
 			var ctx = canvas.getContext('2d');
@@ -68,6 +68,7 @@
 				fftPlayer.clear("canvas");
 				fftPlayer.drawSpectrum("canvas");
 				requestAnimationFrame(animate);
+				// console.log(fftPlayer.getProgress(), fftPlayer.getCurrentTime());
 			}
 			animate();
 
