@@ -20,6 +20,7 @@
 	</head>
 	<body>
 		<div id="container"></div>
+		<script src="lib/js.fft.ftdd.min.js"></script>
 		<script src="lib/js.fft.player.js"></script>
 		<script src="lib/js.fft.visualizer.js"></script>
 		<script src="lib/js.fft.drawer.js"></script>
@@ -43,7 +44,8 @@
 
 			function animate() {
 				requestAnimationFrame(animate);
-				visualizer.renderValue(fftPlayer.integrateVolume * .2);
+				visualizer.renderValue(fftPlayer.integrated.getValue());
+				//console.log(fftPlayer.integrated.getValue());
 				// visualizer.renderValue(fftPlayer.smoothVolume + 0.01);
 			}
 			animate();
@@ -56,8 +58,6 @@
 			document.addEventListener("playlistTrackFinished", onTrackDone);
 
 			function onTrackDone(event) {
-				// fftPlayer.smoothVolume = 0.0
-				fftPlayer.integrateVolume = 0.0;
 				console.log("[app.js] onTrackDone");
 			}
 

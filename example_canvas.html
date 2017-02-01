@@ -12,7 +12,7 @@
 				font-size:13px;
 				text-align:center;
 				font-weight: bold;
-				background-color: #000000;
+				background-color: #444;
 				margin: 0px;
 				overflow: hidden;
 			}
@@ -22,6 +22,7 @@
 				left:0;
 				top:0;
 				z-index:-1;
+				background-color: #222;
 			}
 
 		</style>
@@ -30,27 +31,18 @@
 		<div id="container"></div>
 
 		<canvas id="canvas" width="100%" height="100%">canvas</canvas>
-
+		<script src="lib/js.fft.ftdd.min.js"></script>
 		<script src="lib/js.fft.player.js"></script>
 		<script src="lib/js.fft.drawer.js"></script>
-		<script src="lib/js.fft.visualizer.js"></script>
 		<script src="lib/three.min.js"></script>
 		<script src="lib/Detector.js"></script>
 
 		<script type="text/javascript">
 
-			if (!Detector.webgl) Detector.addGetWebGLMessage();
-
-			// var visualizer = new FFTPlayerVisualizer();
-			// visualizer.loadShader("shaders/plain.vert", "shaders/plain.frag");
-			// visualizer.resize(window.innerWidth, window.innerHeight);
-
 			var fftPlayer = new FFTPlayer();
-			fftPlayer.smoothTime = 0.1;			
+			fftPlayer.smoothTime = 0.1;
 			fftPlayer.ready = function() {fftPlayer.play();}
 			fftPlayer.loadAudio("audio/sound.m4a");
-
-
 
 			var canvas = document.getElementById('canvas');
 			var ctx = canvas.getContext('2d');
@@ -60,8 +52,6 @@
 			ctx.clearRect(0, 0, width, height);
 			console.log(ctx);
 			console.log(canvas);
-
-
 
 			function resizeCanvas() {
 				var ratio = window.devicePixelRatio || 1;
@@ -73,14 +63,11 @@
 				canvas.style.height = height + "px";
 			}
 			resizeCanvas();
-			window.addEventListener('resize', resizeCanvas, false);
 
 			function animate() {
 				fftPlayer.clear("canvas");
 				fftPlayer.drawSpectrum("canvas");
 				requestAnimationFrame(animate);
-				// visualizer.renderValue(fftPlayer.integrateVolume * 1.2);
-				// visualizer.renderValue(fftPlayer.smoothVolume + 0.01);
 			}
 			animate();
 
@@ -89,7 +76,7 @@
 			window.addEventListener('resize', onWindowResize, false);
 			document.addEventListener("click", onMouseClick, false);
 			document.addEventListener("mousemove", onMouseMove);
-			document.addEventListener("playlistTrackFinished", onTrackDone);
+			document.addEventListener("AudioCompleteEvent", onTrackDone);
 
 			function onTrackDone(event) {
 				fftPlayer.smoothVolume = 0.0
@@ -97,14 +84,13 @@
 				console.log("[app.js] onTrackDone");
 			}
 
-
 			var mousePercents = 0.0;
 			function onMouseMove(event) {
 				mousePercents = 1.0 - event.pageY / window.innerHeight;
 			}
 
 			function onWindowResize(event) {
-				if (visualizer) visualizer.resize(window.innerWidth, window.innerHeight);
+				resizeCanvas();
 			}
 
 			function onMouseClick(event) {

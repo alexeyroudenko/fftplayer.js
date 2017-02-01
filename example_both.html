@@ -30,7 +30,7 @@
 		<div id="container"></div>
 
 		<canvas id="canvas" width="100%" height="100%">canvas</canvas>
-
+		<script src="lib/js.fft.ftdd.min.js"></script>
 		<script src="lib/js.fft.player.js"></script>
 		<script src="lib/js.fft.drawer.js"></script>
 		<script src="lib/js.fft.visualizer.js"></script>
@@ -46,7 +46,7 @@
 			visualizer.resize(window.innerWidth, window.innerHeight);
 
 			var fftPlayer = new FFTPlayer();
-			fftPlayer.smoothTime = 0.1;			
+			fftPlayer.smoothTime = 0.1;
 			fftPlayer.ready = function() {fftPlayer.play();}
 			fftPlayer.loadAudio("audio/sound.m4a");
 
